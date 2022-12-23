@@ -1,0 +1,6 @@
+<select (change)="selectItem.emit($event.target.value)">
+    <option default value=""></option>
+    <option *ngFor="let item of items" [value]="item">
+        {{ item }}
+    </option>
+</select>

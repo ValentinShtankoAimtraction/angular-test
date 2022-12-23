@@ -5,6 +5,7 @@
         </li>
     </ng-container>
     <li class="task-list--item" *ngFor="let task of taskList;">
-        <!-- task data -->
+        <app-task-item [task]="task" (checkTask)="checkTask.next($event)"
+            (deleteTask)="deleteTask.next($event)"></app-task-item>
     </li>
 </ul>

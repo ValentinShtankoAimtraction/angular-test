@@ -1,0 +1,28 @@
+.task-filter--container {
+    border-top: 1px solid var(--clr-color-5);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    box-shadow: var(--box-shadow);
+  
+    .task-filter--counter {
+      font-size: var(--fz-3);
+      color: var(--clr-color-3);
+    }
+  
+    .task-filter--state-filter {
+      ul {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+  
+        li {
+          color: var(--clr-color-3);
+          text-transform: capitalize;
+          cursor: pointer;
+  
+          &.active {
+            color: var(--clr-blue);
+          }
+        }
+      }
+    }
+  }

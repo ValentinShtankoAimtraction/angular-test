@@ -7,6 +7,7 @@ import { ApiTasksService } from '@services/api-tasks.service';
 import { HttpClient } from '@angular/common/http';
 import { TASK_CONTAINERS } from './containers';
 import { TASK_COMPONENTS } from './components';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TASK_COMPONENTS } from './components';
   ],
   imports: [
     CommonModule,
-    TasksRoutingModule
+    TasksRoutingModule,
+    SharedModule
   ],
   providers: [
     DatePipe,
