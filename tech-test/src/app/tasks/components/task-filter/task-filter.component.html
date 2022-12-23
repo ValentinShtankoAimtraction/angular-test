@@ -1,0 +1,15 @@
+<div class="task-footer--container card">
+    <div class="task-footer--counter">
+        <span>{{count}} items left</span>
+    </div>
+    <div class="task-footer--state-filter">
+        <ul>
+            <li *ngFor="let type of types" (click)="changeType(type)" [class.active]="activeType === type">
+                {{type}}
+            </li>
+        </ul>
+    </div>
+    <div class="task-footer--category-filter">
+        <!-- filtering by category -->
+    </div>
+</div>
