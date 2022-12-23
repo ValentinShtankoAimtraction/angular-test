@@ -17,7 +17,7 @@ export class TasksComponent implements OnInit {
   public list$: Observable<ITask[]> = this._taskService.tasks$;
   public count$: Observable<number> = this._taskService.count$;
   public categories$: Observable<string[]> = this._taskService.categories();
-  
+
   constructor(
     @Inject(API_TASKS_SERVICE) private readonly _taskService: IAPITaskService,
     private readonly _datePipe: DatePipe
@@ -41,5 +41,9 @@ export class TasksComponent implements OnInit {
 
   onChangeFilter(filter): void {
     this._taskService.changeFilter(filter);
+  }
+
+  onTaskCreate(task: Partial<ITask>): void {
+    this._taskService.post(task);
   }
 }

@@ -1,1 +1,35 @@
-<p>task-add works!</p>
+<div class="task-add--container card">
+    <mat-accordion>
+        <mat-expansion-panel hideToggle class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Create a new task
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formGroup" (ngSubmit)="onFormSave(formGroup.getRawValue())">
+                <div class="task-add--block">
+                    <mat-form-field [appearance]="'outline'">
+                        <mat-label>Label</mat-label>
+                        <input matInput formControlName="label" placeholder="Task Name">
+                    </mat-form-field>
+                    <mat-form-field [appearance]="'outline'">
+                        <mat-label>Label</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let item of categories" [value]="item">{{item}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="task-input--description">
+                    <mat-form-field [appearance]="'fill'">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName="description" matInput placeholder="Task Name"></textarea>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" type="submit">Create task</button>
+                </div>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>

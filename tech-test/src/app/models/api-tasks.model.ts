@@ -12,7 +12,7 @@ export interface IAPITaskService {
     list(): void;
     get(id: number): Observable<ITask>;
     patch(task: Partial<ITask>): void;
-    post(task: Partial<ITask>): Observable<ITask>;
+    post(task: Partial<ITask>): void;
     delete(id: number): void;
 
     // internal filter

@@ -65,8 +65,9 @@ export class ApiTasksService implements IAPITaskService {
       .toPromise()
       .then(() => this.list());
   }
-  post(task: Partial<ITask>): Observable<ITask> {
-    return this._http.post<ITask>(`${environment.api.host}/tasks`, task);
+  post(task: Partial<ITask>): void {
+    this._http.post<ITask>(`${environment.api.host}/tasks`, task).toPromise()
+    .then(() => this.list());
   }
   delete(id: number): void {
     this._http

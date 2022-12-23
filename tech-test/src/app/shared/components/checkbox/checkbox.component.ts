@@ -1,20 +1,27 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  Input,
+  OnInit,
+} from "@angular/core";
 import {
   ControlValueAccessor,
   FormControl,
-  NG_VALUE_ACCESSOR
+  NG_VALUE_ACCESSOR,
 } from "@angular/forms";
 @Component({
-  selector: 'app-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss'],providers: [
+  selector: "app-checkbox",
+  templateUrl: "./checkbox.component.html",
+  styleUrls: ["./checkbox.component.scss"],
+  providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CheckboxComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent implements ControlValueAccessor, OnInit {
   onChange: any = () => {};
@@ -29,7 +36,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {}
 
@@ -42,5 +49,4 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
 
     this.onChange(e);
   }
-
 }

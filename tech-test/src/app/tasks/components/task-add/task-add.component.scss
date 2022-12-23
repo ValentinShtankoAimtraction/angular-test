@@ -1,0 +1,29 @@
+.task-add--container {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+
+  .mat-accordion {
+    width: 100%;
+  }
+
+  .mat-expansion-panel {
+    background: var(--clr-color-6);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .task-add--block {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .mat-form-field,
+    button[type="submit"] {
+      width: 100%;
+    }
+  }
+}

@@ -1,12 +1,8 @@
-<div>
-    <div>
-        <app-task-add></app-task-add>
-    </div>
+<div class="tasks">
+    <app-task-add [categories]="categories$ | async" (saveForm)="onTaskCreate($event)"></app-task-add>
     <div>
         <app-task-list [taskList]="list$ | async" (checkTask)="onTaskChecked($event)"
             (deleteTask)="onTaskDelete($event)"></app-task-list>
-    </div>
-    <div>
         <app-task-filter [categories]="categories$ | async" (changeFilter)="onChangeFilter($event)"></app-task-filter>
     </div>
 </div>

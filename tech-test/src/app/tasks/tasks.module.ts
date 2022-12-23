@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { TASK_CONTAINERS } from './containers';
 import { TASK_COMPONENTS } from './components';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     TasksRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [
     DatePipe,
