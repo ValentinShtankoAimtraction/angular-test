@@ -14,5 +14,10 @@
       "category": "bureaucracy",
       "done": "22-10-2019"
     }
+  ],
+  "categories": [
+    "house",
+    "bureaucracy",
+    "none"
   ]
 }
