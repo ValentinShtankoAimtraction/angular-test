@@ -1,0 +1,25 @@
+<ng-container *ngIf="task">
+    <div class="task-item--container" [class.checked]="task.done">
+
+        <div class="task-item--inner-container card">
+            <div class="task-item--checkbox">
+                <app-checkbox [formControl]="checkedControl"></app-checkbox>
+            </div>
+            <div class="task-item--text">
+                <ng-container *ngIf="task.category">
+                    <div class="task-item--category">{{ task.category }}</div>
+                </ng-container>
+                <div class="task-item--label">{{ task.label }}</div>
+                <div class="task-item--description">{{ task.description }}</div>
+                <ng-container *ngIf="task.done">
+                    <div class="task-item--date">{{ task.done }}</div>
+                </ng-container>
+            </div>
+            <div class="task-item--actions">
+                <button class="task-item--delete" (click)="deleteTask.next(task.id)">
+                    <img src="/assets/icons/icon-cross.svg" alt="Delete task" />
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-container>

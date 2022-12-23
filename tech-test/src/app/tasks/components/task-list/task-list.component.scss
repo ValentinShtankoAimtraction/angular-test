@@ -1,0 +1,21 @@
+.task-list--container {
+  width: auto;
+
+  li {
+    overflow: hidden;
+  }
+
+  li:first-child {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+
+  li:not(:last-child) {
+    border-bottom: 1px solid var(--clr-color-6);
+  }
+
+  .empty {
+    flex: 1;
+    color: var(--clr-color-2);
+    text-align: center;
+  }
+}

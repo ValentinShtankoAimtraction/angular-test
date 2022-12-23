@@ -1,0 +1,12 @@
+.cdk-overlay-container {
+  font-family: var(--ff-sans);
+}
+
+/* SELECTION */
+.mat-select-panel {
+  background: var(--clr-page-bg);
+
+  .mat-option {
+    font-family: var(--ff-sans);
+  }
+}

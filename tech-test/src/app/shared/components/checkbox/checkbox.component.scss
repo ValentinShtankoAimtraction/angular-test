@@ -1,0 +1,30 @@
+.checkbox-container {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.1rem solid var(--clr-color-5);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .checkbox-input {
+    transform: scale(1.8);
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .check {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    border-radius: inherit;
+
+    &.checked {
+      background: url("/assets/icons/icon-check.svg") no-repeat center;
+    }
+  }
+}
