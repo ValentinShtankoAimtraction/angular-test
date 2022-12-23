@@ -7,7 +7,7 @@ import { IAPITaskService, ITask, ITaskFilter, ITaskTypes } from "@models/index";
 
 const INITIAL_FILTER: ITaskFilter = {
   type: ITaskTypes.ALL,
-  category: '',
+  category: "",
 };
 
 @Injectable({
@@ -17,7 +17,7 @@ export class ApiTasksService implements IAPITaskService {
   private _tasksSubject: BehaviorSubject<ITask[]> = new BehaviorSubject<
     ITask[]
   >([]);
-  
+
   get tasks$(): Observable<ITask[]> {
     return combineLatest([
       this.activeFilters$,
@@ -59,24 +59,24 @@ export class ApiTasksService implements IAPITaskService {
   get(id: number): Observable<ITask> {
     return this._http.get<ITask>(`${environment.api.host}/tasks/${id}`);
   }
-  patch(task: Partial<ITask>): void {
-    this._http
+  async patch(task: Partial<ITask>): Promise<void> {
+    await this._http
       .patch<ITask>(`${environment.api.host}/tasks/${task.id}`, task)
-      .toPromise()
-      .then(() => this.list());
+      .toPromise();
+    this.list();
   }
-  post(task: Partial<ITask>): void {
-    this._http.post<ITask>(`${environment.api.host}/tasks`, task).toPromise()
-    .then(() => this.list());
+  async post(task: Partial<ITask>): Promise<void> {
+    await this._http
+      .post<ITask>(`${environment.api.host}/tasks`, task)
+      .toPromise();
+    this.list();
   }
-  delete(id: number): void {
-    this._http
-      .delete(`${environment.api.host}/tasks/${id}`)
-      .toPromise()
-      .then(() => this.list());
+  async delete(id: number): Promise<void> {
+    await this._http.delete(`${environment.api.host}/tasks/${id}`).toPromise();
+    this.list();
   }
 
-  changeFilter({ type, category }: ITaskFilter) {
+  changeFilter({ type, category }: Partial<ITaskFilter>) {
     const currentState = this._activeFilters.getValue();
     if (type) {
       currentState.type = type;
