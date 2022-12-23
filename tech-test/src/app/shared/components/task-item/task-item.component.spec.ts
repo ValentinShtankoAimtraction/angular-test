@@ -22,4 +22,30 @@ describe('TaskItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should change checkbox value on init', () => {
+    const controlSpy = spyOn(fixture.componentInstance.checkedControl, 'setValue');
+    component.ngOnChanges({
+      task: {
+        currentValue: {
+          id: '1',
+          label: 'test',
+        },
+        previousValue: null,
+        firstChange: true,
+        isFirstChange() {
+            return true;
+        },
+      }
+    });
+    expect(controlSpy).toHaveBeenCalled();
+  })
+
+
+  it('should not change checkbox value on init', () => {
+    const controlSpy = spyOn(fixture.componentInstance.checkedControl, 'setValue');
+    component.ngOnChanges({});
+    expect(controlSpy).not.toHaveBeenCalled();
+  })
+
 });

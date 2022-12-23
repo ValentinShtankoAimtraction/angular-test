@@ -8,7 +8,7 @@ import { ITask, ITaskState } from '@models/index';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListComponent {
-  @Input() taskList: ITask[];
+  @Input() taskList: ITask[] = [];
   @Output() deleteTask: EventEmitter<number> = new EventEmitter<number>();
   @Output() checkTask: EventEmitter<ITaskState> = new EventEmitter<ITaskState>();
 }

@@ -1,4 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { API_TASKS_SERVICE } from '@tokens/api-tasks.token';
+import { MockTaskApiService } from 'src/app/testing/mock-task-api-service';
 
 import { TasksComponent } from './tasks.component';
 
@@ -8,7 +11,17 @@ describe('TasksComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TasksComponent ]
+      declarations: [ TasksComponent ],
+      imports: [
+        
+      ],
+      providers: [
+        DatePipe,
+        {
+          provide: API_TASKS_SERVICE,
+          useClass: MockTaskApiService
+        }
+      ]
     })
     .compileComponents();
   });

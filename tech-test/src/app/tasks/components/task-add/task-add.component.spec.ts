@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TaskAddComponent } from './task-add.component';
 
@@ -8,7 +10,11 @@ describe('TaskAddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskAddComponent ]
+      declarations: [ TaskAddComponent ],
+      imports: [
+        NoopAnimationsModule,
+        SharedModule
+      ]
     })
     .compileComponents();
   });
