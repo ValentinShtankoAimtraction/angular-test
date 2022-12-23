@@ -3,6 +3,7 @@
     <div>
         <app-task-list [taskList]="list$ | async" (checkTask)="onTaskChecked($event)"
             (deleteTask)="onTaskDelete($event)"></app-task-list>
-        <app-task-filter [categories]="categories$ | async" (changeFilter)="onChangeFilter($event)"></app-task-filter>
+        <app-task-filter [count]="count$ | async" [categories]="categories$ | async"
+            (changeFilter)="onChangeFilter($event)"></app-task-filter>
     </div>
 </div>

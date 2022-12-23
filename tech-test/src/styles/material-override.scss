@@ -3,10 +3,24 @@
 }
 
 /* SELECTION */
+
 .mat-select-panel {
   background: var(--clr-page-bg);
 
   .mat-option {
     font-family: var(--ff-sans);
+  }
+}
+
+/* FOPM FIELDS */
+.mat-form-field-appearance-outline.mat-form-field.custom {
+  max-width: 10rem;
+
+  .mat-form-field-wrapper {
+    padding: unset;
+
+    .mat-form-field-infix {
+      padding: 0.5rem 0;
+    }
   }
 }
