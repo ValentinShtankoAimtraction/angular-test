@@ -1,7 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
-import { distinctUntilChanged, map } from "rxjs/operators";
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from "rxjs";
+import {
+  catchError,
+  distinctUntilChanged,
+  filter,
+  map,
+  take,
+  tap,
+} from "rxjs/operators";
 import { environment } from "@env/environment";
 import { IAPITaskService, ITask, ITaskFilter, ITaskTypes } from "@models/index";
 
@@ -14,9 +21,7 @@ const INITIAL_FILTER: ITaskFilter = {
   providedIn: "root",
 })
 export class ApiTasksService implements IAPITaskService {
-  private _tasksSubject: BehaviorSubject<ITask[]> = new BehaviorSubject<
-    ITask[]
-  >([]);
+  private _tasksSubject: Subject<ITask[]> = new Subject<ITask[]>();
 
   get tasks$(): Observable<ITask[]> {
     return combineLatest([
@@ -35,7 +40,9 @@ export class ApiTasksService implements IAPITaskService {
                 return task;
             }
           })
-          .filter((task) => task.category.includes(filters.category));
+          .filter((task) =>
+            filters.category ? task.category.includes(filters.category) : true
+          );
       })
     );
   }
@@ -46,15 +53,19 @@ export class ApiTasksService implements IAPITaskService {
 
   private _activeFilters: BehaviorSubject<ITaskFilter> =
     new BehaviorSubject<ITaskFilter>(INITIAL_FILTER);
+
   get activeFilters$(): Observable<ITaskFilter> {
     return this._activeFilters.asObservable();
   }
   constructor(private _http: HttpClient) {}
+
   async list(): Promise<void> {
-    let tasks = await this._http
+    await this._http
       .get<ITask[]>(`${environment.api.host}/tasks`)
+      .pipe(
+        tap((tasks) => this._tasksSubject.next(tasks))
+      )
       .toPromise();
-    this._tasksSubject.next(tasks);
   }
   get(id: number): Observable<ITask> {
     return this._http.get<ITask>(`${environment.api.host}/tasks/${id}`);
@@ -62,18 +73,20 @@ export class ApiTasksService implements IAPITaskService {
   async patch(task: Partial<ITask>): Promise<void> {
     await this._http
       .patch<ITask>(`${environment.api.host}/tasks/${task.id}`, task)
+      .pipe(tap(() => this.list()))
       .toPromise();
-    this.list();
   }
   async post(task: Partial<ITask>): Promise<void> {
     await this._http
       .post<ITask>(`${environment.api.host}/tasks`, task)
+      .pipe(tap(() => this.list()))
       .toPromise();
-    this.list();
   }
   async delete(id: number): Promise<void> {
-    await this._http.delete(`${environment.api.host}/tasks/${id}`).toPromise();
-    this.list();
+    await this._http
+      .delete(`${environment.api.host}/tasks/${id}`)
+      .pipe(tap(() => this.list()))
+      .toPromise();
   }
 
   changeFilter({ type, category }: Partial<ITaskFilter>) {
@@ -88,6 +101,7 @@ export class ApiTasksService implements IAPITaskService {
   }
 
   categories(): Observable<string[]> {
-    return this._http.get<string[]>(`${environment.api.host}/categories`);
+    return this._http
+      .get<string[]>(`${environment.api.host}/categories`);
   }
 }

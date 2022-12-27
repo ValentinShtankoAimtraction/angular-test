@@ -1,11 +1,13 @@
 <ul class="task-list--container">
-    <ng-container *ngIf="!taskList.length">
+    <ng-container *ngIf="!taskList?.length; else tasks">
         <li class="card">
             <span class="empty">No items found.</span>
         </li>
     </ng-container>
-    <li class="task-list--item" *ngFor="let task of taskList;">
-        <app-task-item [task]="task" (checkTask)="checkTask.next($event)"
-            (deleteTask)="deleteTask.next($event)"></app-task-item>
-    </li>
+    <ng-template #tasks>
+        <li class="task-list--item" *ngFor="let task of taskList;">
+            <app-task-item [task]="task" (checkTask)="checkTask.next($event)"
+                (deleteTask)="deleteTask.next($event)"></app-task-item>
+        </li>
+    </ng-template>
 </ul>

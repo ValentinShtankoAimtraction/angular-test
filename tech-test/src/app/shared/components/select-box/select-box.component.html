@@ -2,8 +2,10 @@
     <mat-label>Category</mat-label>
     <mat-select (selectionChange)="onSelect($event)">
         <mat-option value=""></mat-option>
-        <mat-option *ngFor="let item of items" [value]="item">
-            {{ item }}
-        </mat-option>
+        <ng-container *ngIf="items?.length">
+            <mat-option *ngFor="let item of items" [value]="item">
+                {{ item }}
+            </mat-option>
+        </ng-container>
     </mat-select>
 </mat-form-field>

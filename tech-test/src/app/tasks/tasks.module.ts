@@ -9,6 +9,7 @@ import { TASK_CONTAINERS } from './containers';
 import { TASK_COMPONENTS } from './components';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -18,8 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    TasksRoutingModule,
     SharedModule,
+    TasksRoutingModule,
     ReactiveFormsModule
   ],
   providers: [

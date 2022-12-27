@@ -14,36 +14,36 @@ const DATE_FORMAT = 'dd-MM-yyyy';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksComponent implements OnInit {
-  public list$: Observable<ITask[]> = this._taskService.tasks$;
-  public count$: Observable<number> = this._taskService.count$;
-  public categories$: Observable<string[]> = this._taskService.categories();
+  public list$: Observable<ITask[]> = this.taskService.tasks$;
+  public count$: Observable<number> = this.taskService.count$;
+  public categories$: Observable<string[]> = this.taskService.categories();
 
   constructor(
-    @Inject(API_TASKS_SERVICE) private readonly _taskService: IAPITaskService,
-    private readonly _datePipe: DatePipe
+    @Inject(API_TASKS_SERVICE) public readonly taskService: IAPITaskService,
+    public readonly datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
-      this._taskService.list()
+      this.taskService.list()
   }
 
   onTaskChecked({id, checked}: ITaskState): void {
     let done: boolean | string = checked;
     if(checked) {
-      done = this._datePipe.transform(new Date(), DATE_FORMAT);
+      done = this.datePipe.transform(new Date(), DATE_FORMAT);
     } 
-    this._taskService.patch({id, done});
+    this.taskService.patch({id, done});
   }
 
   onTaskDelete(id: number): void {
-    this._taskService.delete(id);
+    this.taskService.delete(id);
   }
 
   onChangeFilter(filter): void {
-    this._taskService.changeFilter(filter);
+    this.taskService.changeFilter(filter);
   }
 
   onTaskCreate(task: Partial<ITask>): void {
-    this._taskService.post(task);
+    this.taskService.post(task);
   }
 }
